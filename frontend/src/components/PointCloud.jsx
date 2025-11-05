@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import "./PointCloud.css"
 
 
-export default function PointCloud({ points}) {
+export default function PointCloud({ points, colorMode }) {
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -15,7 +16,6 @@ export default function PointCloud({ points}) {
 
     // Camera - viewpoint for scene
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.y = -2;
     camera.position.z = -2;
 
     // Renderer - canvas for scene
@@ -30,11 +30,18 @@ export default function PointCloud({ points}) {
     geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
 
     // Geometry - map colors
-    const colorMap = { red: 0xff0000, orange: 0xffa500, green: 0x00ff00 };
-    const colors = new Float32Array(points.flatMap(p => {
-      const c = new THREE.Color(colorMap[p.color] || 0xffffff);
-      return [c.r, c.g, c.b];
-    }));
+    let colors;
+    if(colorMode === "colored") {
+      const colorMap = { red: 0xff0000, orange: 0xffa500, green: 0x00ff00 };
+      colors = new Float32Array(points.flatMap(p => {
+        const c = new THREE.Color(colorMap[p.color] || 0xffffff);
+        return [c.r, c.g, c.b];
+      }));
+    } else {
+      colors = new Float32Array(points.flatMap(() => [1, 1, 1]));
+    }
+    
+    
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     // Material - look for geometry (shape, size, transparency)
@@ -61,8 +68,9 @@ export default function PointCloud({ points}) {
       renderer.dispose();
       geometry.dispose();
       material.dispose();
+      mountRef.current.removeChild(renderer.domElement)
     };
-  }, [points]);
+  }, [points, colorMode]);
 
   return (
     <div className="point-cloud-container" ref={mountRef}></div>

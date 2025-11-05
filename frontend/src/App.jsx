@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import PointCloud from "./components/PointCloud";
-import './App.css'
+import Menu from "./components/Menu";
+import './App.css';
 
 function App() {
   const [points, setPoints] = useState([]);
+  const [colorMode, setColorMode] = useState("default");
 
   // Points from FastAPI
   useEffect(() => {
@@ -15,7 +17,8 @@ function App() {
 
   return (
     <div className='container'>
-      <PointCloud points={points}></PointCloud>
+      <PointCloud points={points} colorMode={colorMode}></PointCloud>
+      <Menu setColorMode={setColorMode}></Menu>
     </div>
   )
 }

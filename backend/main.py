@@ -19,5 +19,4 @@ app.add_middleware(
 
 @app.get("/points")
 def get_points(filename: str = "data_1.txt"):
-    points = load_points(filename)
-    return points
+    return load_points(filename)
