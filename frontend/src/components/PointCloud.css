@@ -1,4 +1,49 @@
-.point-cloud-container {
+.app-container {
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
+}
+
+.point-cloud-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  border-style: dashed;
+  border-width: 3px;
+  border-radius: 8px;
+  border-color: rgba(80,80,80,0.85);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem; 
+}
+
+.file-info {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6rem 1rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.file-info p {
+  margin: 0;
+  padding: 0;
 }

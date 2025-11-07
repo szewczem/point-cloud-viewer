@@ -14,11 +14,5 @@ def load_points(filename: str):
     with open(file_path, "r") as f:
         for line in f:
             x, y, z = map(float, line.strip().split())
-            if z < -1:
-                color = "red"
-            elif -1 <= z < 0.5:
-                color = "orange"
-            else:
-                color = "green"
-            points.append({"x": y, "y": z, "z": x, "color": color})
+            points.append({"x": y, "y": z, "z": x})
     return points

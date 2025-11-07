@@ -2,6 +2,7 @@
   position: absolute;
   top: 2rem;
   right: 2rem;
+  width: 10rem;
   padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
@@ -9,11 +10,63 @@
   gap: 0.75rem;
   background: rgba(80,80,80,0.85);
   box-shadow: 0 0 0.5rem rgba(0,0,0,0.4);
-};
+}
 
-.button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 8px;
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 0;
+  line-height: 1.6rem;
+}
+
+.file-list {
+  margin: 0;
+  list-style-type: none;
+  overflow: hidden;
+  max-height: 150px;
+  overflow-y: auto;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.file-list li {
+  position: relative;
+  max-width: 100%;  
+  padding-bottom: 0.2rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+p {
+  margin: 0;
+  padding-left: 1rem;
+  display: inline-block;
+}
+
+.file-list li:hover {
+  background: rgba(100, 108, 255, 0.85)
+}
+
+.file-list .disabled {
+  text-align: center;
+  padding: 0.5rem;
+  cursor: default;
+}
+
+.file-list li.disabled:hover {
+  background: none;
+}
+
+.facaretdown {
+  margin-bottom: -0.1rem;
+  margin-left: 0.5rem;
+  transform: rotate(0deg);
+}
+
+.facaretdown.open {
+  margin-bottom: -0.1rem;
+  margin-right: 0;
+  padding-left: 0;
+  transform: rotate(180deg);
 }
