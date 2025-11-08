@@ -27,7 +27,7 @@ export default function PointCloud({ points, colorMode, filename }) {
 
     // Camera - viewpoint for scene
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, -4);
+    camera.position.set(-4, 0, 0);
     cameraRef.current = camera;
 
     // Renderer - canvas for scene
@@ -116,14 +116,14 @@ export default function PointCloud({ points, colorMode, filename }) {
       colors.setXYZ(i, color.r, color.g, color.b);
     }
     colors.needsUpdate = true;
-  }, [colorMode])
+  }, [colorMode, points])
 
   return (
     <div className="app-container">
       <div className="point-cloud-container" ref={mountRef}></div>
       {!points.length && (
           <div className="overlay-message">
-            <TbUpload size={32}/>
+            <TbUpload size={48}/>
             <p>Drop a .txt file or select one from the Menu</p>
           </div>
         )}

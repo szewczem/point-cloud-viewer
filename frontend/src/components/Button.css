@@ -1,17 +1,29 @@
-button {
+.button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 3px solid transparent;
   padding: 0.6rem 1rem;  
   width: 10rem;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  color: var(--light-text);
   background-color: #1a1a1a;
   cursor: pointer;
   white-space: nowrap;
   transition: border-color 0.25s;
 }
 
-button:hover {
-  border-color: #646cff;
+.button:hover {
+  background-color: var(--main-purple-color);
+}
+
+.button.active {
+  border-color: var(--main-purple-color);
+}
+
+.button:disabled {
+  border-color: #1a1a1a;
+  background-color: #1a1a1a;
+  opacity: 0.4;
+  cursor: auto;
 }

@@ -14,5 +14,5 @@ def load_points(filename: str):
     with open(file_path, "r") as f:
         for line in f:
             x, y, z = map(float, line.strip().split())
-            points.append({"x": y, "y": z, "z": x})
+            points.append({"x": x, "y": z, "z": y})
     return points

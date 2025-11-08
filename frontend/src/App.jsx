@@ -22,7 +22,7 @@ function App() {
         return null;
       }
       const [x, y, z] = coordinates;
-      return { x: y, y: z, z: x };
+      return { x: x, y: z, z: y };
     }).filter(Boolean);
     // console.log(parsedPoints);
     setPoints(parsedPoints);
@@ -49,7 +49,7 @@ function App() {
       const res = await fetch(`http://127.0.0.1:8000/points?filename=${filename}`);
       if (!res.ok) throw new Error("File not found.");
       const data = await res.json();
-      console.log("From loaded: ", data)
+      // console.log("Loaded: ", data)
       setPoints(data);
       setSelectedFile(filename);
     } catch (err) {
@@ -62,7 +62,14 @@ function App() {
     <div className='container'>
       <FileDropWindow handleDropFile={handleDropFile} />
       <PointCloud points={points} colorMode={colorMode} filename={selectedFile}></PointCloud>
-      <Menu files={files} selectedFile={selectedFile} handleLoadFile={handleLoadFile} setColorMode={setColorMode}></Menu>
+      <Menu 
+        files={files} 
+        selectedFile={selectedFile} 
+        handleLoadFile={handleLoadFile} 
+        setColorMode={setColorMode} 
+        colorMode={colorMode}
+        hasFile={points.length > 0}> 
+      </Menu>
     </div>
   )
 }

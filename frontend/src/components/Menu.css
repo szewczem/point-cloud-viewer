@@ -12,6 +12,10 @@
   box-shadow: 0 0 0.5rem rgba(0,0,0,0.4);
 }
 
+.file-list-container {
+  margin-top: -0.75rem;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -23,9 +27,21 @@ ul {
   margin: 0;
   list-style-type: none;
   overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: max-height 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+}
+
+.file-list.visible {
   max-height: 150px;
-  overflow-y: auto;
-  animation: fadeIn 0.2s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+  transition-duration: 0.5s;
+}
+
+.file-list.hidden {
+  pointer-events: none;
 }
 
 .file-list li {
@@ -36,12 +52,6 @@ ul {
   text-overflow: ellipsis;
   cursor: pointer;
   transition: background 0.2s;
-}
-
-p {
-  margin: 0;
-  padding-left: 1rem;
-  display: inline-block;
 }
 
 .file-list li:hover {
@@ -58,6 +68,12 @@ p {
   background: none;
 }
 
+p {
+  margin: 0;
+  padding-left: 1rem;
+  display: inline-block;
+}
+
 .facaretdown {
   margin-bottom: -0.1rem;
   margin-left: 0.5rem;
@@ -70,3 +86,4 @@ p {
   padding-left: 0;
   transform: rotate(180deg);
 }
+

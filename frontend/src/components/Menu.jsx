@@ -3,19 +3,15 @@ import { FaCaretDown } from "react-icons/fa6";
 import Button from "./Button";
 import "./Menu.css";
 
-export default function Menu({ files, selectedFile, setColorMode, handleLoadFile }) {
+export default function Menu({ files, hasFile, setColorMode, colorMode, handleLoadFile }) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
  
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+    if (!hasFile) {
+      setIsOpen(false);
+    }
+  }, [hasFile]);
 
   const handleSelect = (file) => {
     handleLoadFile(file);
@@ -31,9 +27,9 @@ export default function Menu({ files, selectedFile, setColorMode, handleLoadFile
       <Button onClick={openFileMenu} text={"Select File"}>
         <FaCaretDown className={`facaretdown ${isOpen ? "open" : ""}`} />
       </Button>
-      <>
-        {isOpen && (
-        <ul className="file-list">
+      <div className="file-list-container">
+        {files.length > 0 && (
+        <ul className={`file-list ${isOpen ? "visible" : "hidden"}`}>
           {files.length === 0 ? (
             <li className="disabled">No files found</li>
           ) : (
@@ -45,9 +41,19 @@ export default function Menu({ files, selectedFile, setColorMode, handleLoadFile
           )}
         </ul>
       )}
-      </>      
-      <Button onClick={() => setColorMode("default")} text={"Default"}></Button>
-      <Button onClick={() => setColorMode("colored")} text={"Color"}></Button>
+      </div>      
+      <Button 
+        className={colorMode === "default" ? "active" : ""} 
+        onClick={() => hasFile && setColorMode("default")} 
+        text={"Default View"}
+        disabled={!hasFile}>        
+      </Button>
+      <Button 
+        className={colorMode === "colored" ? "active" : ""} 
+        onClick={() => hasFile && setColorMode("colored")} 
+        text={"Color View"}
+        disabled={!hasFile}>        
+      </Button>
     </div>
   )
 }
