@@ -1,11 +1,30 @@
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef, useImperativeHandle } from "react";
 import * as THREE from "three";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { TbUpload } from "react-icons/tb";
 import "./PointCloud.css"
 
 
-export default function PointCloud({ points, colorMode, filename }) {
+/*
+PointCloud logic: 
+- Renders a 3D point cloud using Three.js based on provided points data.
+- Manages scene, camera, renderer, controls, and point colors.
+- Supports color modes and camera reset via ref.
+
+Variables:
+- points: Points coordinates ({x, y, z}).
+- colorMode: Color scheme for rendered points.
+  -- "default": all points white
+  -- "colored": points colored based on height (red/orange/green)
+- filename: Name of the currently selected file (for display).
+- ref (via forwardRef & useImperativeHandle): Allows parent (App) to call functions from children (PointCloud -> resetView - resetting the camera view).
+
+Notes:
+- Automatically updates point colors when colorMode changes.
+- Resizes renderer when window size changes.
+- Provides a resetView() function to reset camera view to the starting position.
+*/
+const PointCloud = forwardRef(({ points, colorMode, filename }, ref) => {
   const mountRef = useRef(null);  
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
@@ -85,6 +104,7 @@ export default function PointCloud({ points, colorMode, filename }) {
     };
   }, [points]);
 
+  // Change color scheme when colorMode or points change 
   useEffect(() => {
     const pointCloud = pointCloudRef.current;
     if (!pointCloud) return;
@@ -116,7 +136,15 @@ export default function PointCloud({ points, colorMode, filename }) {
       colors.setXYZ(i, color.r, color.g, color.b);
     }
     colors.needsUpdate = true;
-  }, [colorMode, points])
+  }, [colorMode, points]);
+
+  useImperativeHandle(ref, () => ({
+    resetView: () => {
+      if (controlsRef.current) {
+      controlsRef.current.reset();
+    } 
+    },
+  }));
 
   return (
     <div className="app-container">
@@ -134,4 +162,6 @@ export default function PointCloud({ points, colorMode, filename }) {
         )}
     </div>    
   )
-}
+});
+
+export default PointCloud;

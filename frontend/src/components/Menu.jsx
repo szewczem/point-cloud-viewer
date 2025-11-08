@@ -3,9 +3,26 @@ import { FaCaretDown } from "react-icons/fa6";
 import Button from "./Button";
 import "./Menu.css";
 
-export default function Menu({ files, hasFile, setColorMode, colorMode, handleLoadFile }) {
+
+/*
+Menu logic: 
+- Provides a user interface for selecting files, switching point color modes, and resetting the camera view.
+
+Variables:
+- files: List of avaible files to display in the menu.
+- hasFile: Boolean indicating whether a valid file has been selected.
+- colorMode: Color scheme for rendered points.
+  -- "default": all points white
+  -- "colored": points colored based on height (red/orange/green)
+- setColorMode: Function to update the colorMode state.
+- handleLoadFile: Function to load point data from a selected file.
+- onResetView: Function to reset the camera view (passed from App via ref to PointCloud).
+
+Notes:
+- The active color mode button highlights the current color scheme.
+*/
+export default function Menu({ files, hasFile, colorMode, setColorMode, handleLoadFile, onResetView }) {
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef(null);
  
   useEffect(() => {
     if (!hasFile) {
@@ -52,6 +69,11 @@ export default function Menu({ files, hasFile, setColorMode, colorMode, handleLo
         className={colorMode === "colored" ? "active" : ""} 
         onClick={() => hasFile && setColorMode("colored")} 
         text={"Color View"}
+        disabled={!hasFile}>        
+      </Button>
+      <Button 
+        onClick={() => onResetView()} 
+        text={"Reset Camera"}
         disabled={!hasFile}>        
       </Button>
     </div>
