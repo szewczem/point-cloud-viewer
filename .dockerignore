@@ -1,0 +1,29 @@
+# Global ignores
+.git
+.gitignore
+.DS_Store
+__pycache__
+*.pyc
+.env
+.env.local
+.dockerignore
+
+# Frontend 
+frontend/node_modules
+frontend/dist
+frontend/Dockerfile
+frontend/.dockerignore
+frontend/.gitignore
+
+# Backend
+backend/__pycache__
+backend/.pytest_cache
+backend/Dockerfile
+backend/.dockerignore
+backend/.gitignore
+backend/.venv/
+
+# Ignore environment and config files
+frontend/.env
+backend/.env
+
