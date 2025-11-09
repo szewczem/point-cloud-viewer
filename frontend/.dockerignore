@@ -32,3 +32,5 @@ Dockerfile
 *.log
 *.tmp
 *.bak
+
+public/
