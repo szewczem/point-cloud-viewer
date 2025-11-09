@@ -142,10 +142,10 @@ point-cloud-viewer/
 
 ## Results
 ### Start view:
-![App Screenshot - start view](frontend/public/1.png)
+![App Screenshot - start view](frontend/public/1.jpg)
 
 ### Default data view:
-![App Screenshot - default data view](frontend/public/2.png)
+![App Screenshot - default data view](frontend/public/2.jpg)
 
 ### Modified data view:
-![App Screenshot - modified data view](frontend/public/3.png)
+![App Screenshot - modified data view](frontend/public/3.jpg)
