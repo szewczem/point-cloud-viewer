@@ -105,6 +105,7 @@ http://127.0.0.1:8000
 cd frontend
 ```
 7. Install dependencies:
+
 Make sure [Node 22.20.0](https://nodejs.org/en/download) is installed on your system.
 ```
 npm install
