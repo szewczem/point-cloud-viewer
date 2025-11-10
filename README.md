@@ -149,3 +149,7 @@ point-cloud-viewer/
 
 ### Modified data view:
 ![App Screenshot - modified data view](frontend/public/3.jpg)
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
