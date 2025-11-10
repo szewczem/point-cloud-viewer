@@ -59,7 +59,7 @@ docker build -t point-cloud-viewer .
 ```
 3. Run the container:
 ```
-docker run -p 8000:8000 --name point-cloud-viewer point-cloud-app
+docker run -p 8000:8000 --name point-cloud-viewer point-cloud-viewer
 ```
 4. Open your browser and go to:
 ```
